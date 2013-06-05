@@ -1,3 +1,9 @@
+halkneistiyor.org
+=================
+
+Halkın bagımsız sesi
+=================
+
 App Engine Java Application
 Copyright (C) 2010-2012 Google Inc.
 
