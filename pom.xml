@@ -13,6 +13,8 @@
         <appengine.target.version>1.8.0</appengine.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-framework.version>3.2.3.RELEASE</spring-framework.version>
+        <spring-security.version>3.1.4.RELEASE</spring-security.version>
+        <spring-social.version>1.0.2.RELEASE</spring-social.version>
     </properties>
 
     <dependencies>
@@ -47,6 +49,30 @@
             <version>${spring-framework.version}</version>
         </dependency>
 
+        <!-- spring security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+    
+        <!-- spring social -->
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-core</artifactId>
+            <version>${spring-social.version}</version>
+        </dependency> 
+    
         <!-- Test Dependencies -->
         <dependency>
             <groupId>com.google.appengine</groupId>
