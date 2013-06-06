@@ -5,9 +5,9 @@
         <div class="navbar-inner">
             <div class="container">
                 <ul class="nav">
-                    <li><a href="/index.jsp">Ana sayfa</a></li>
-                    <li><a href="/populer.jsp">En popüler talepler</a></li>
-                    <li><a href="/newrequest.jsp">Yeni talep gir</a></li>
+                    <li><a href="/">Ana sayfa</a></li>
+                    <li><a href="/request/popular">En popüler talepler</a></li>
+                    <li><a href="/request/new">Yeni talep gir</a></li>
                     <li><a href="#">En yeni talepler</a></li>
                     <li><a href="#">Hakkımızda</a></li>
                     <li><a href="#">İletişim</a></li>

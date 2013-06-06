@@ -8,10 +8,11 @@
 <div class="container">
 
   <jsp:include page="nav.jsp"/>
-
+    
   <!-- Jumbotron -->
   <div class="jumbotron">
     <h1>Sesinizi duyurun!</h1>
+    
     <p class="lead"></p>
     <a class="btn btn-large btn-success" href="#">Facebook</a>
     <a class="btn btn-large btn-success" href="#">Twitter</a>
@@ -47,6 +48,6 @@
 
 </div> <!-- /container -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>
