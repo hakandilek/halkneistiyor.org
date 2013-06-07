@@ -1,11 +1,11 @@
 package org.halkneistiyor.security;
 
-import org.halkneistiyor.security.model.User;
+import org.halkneistiyor.security.model.SocialUser;
 
 public interface UserRegistry {
-	User findUser(String userId);
+	SocialUser findUser(String userId);
 
-	void registerUser(User newUser);
+	void registerUser(SocialUser newUser);
 
 	void removeUser(String userId);
 }

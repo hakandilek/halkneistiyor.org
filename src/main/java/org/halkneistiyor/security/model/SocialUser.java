@@ -3,7 +3,7 @@ package org.halkneistiyor.security.model;
 import java.io.Serializable;
 import java.util.Set;
 
-public class User implements Serializable {
+public class SocialUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -74,7 +74,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User [key=").append(key).append(", email=")
+		builder.append("SocialUser [key=").append(key).append(", email=")
 				.append(email).append(", enabled=").append(enabled).append("]");
 		return builder.toString();
 	}
@@ -105,7 +105,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		SocialUser other = (SocialUser) obj;
 		if (authorities == null) {
 			if (other.authorities != null)
 				return false;

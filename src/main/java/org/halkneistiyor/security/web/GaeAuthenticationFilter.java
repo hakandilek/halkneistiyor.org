@@ -49,7 +49,7 @@ public class GaeAuthenticationFilter extends GenericFilterBean {
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
 			HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-			// User isn't authenticated. Check if there is a Google Accounts
+			// SocialUser isn't authenticated. Check if there is a Google Accounts
 			// user
 			UserService userService = UserServiceFactory.getUserService();
 			User user = userService.getCurrentUser();
@@ -58,7 +58,7 @@ public class GaeAuthenticationFilter extends GenericFilterBean {
 				if (log.isDebugEnabled())
 					log.debug("user : " + user);
 
-				// User has returned after authenticating through GAE. Need to
+				// SocialUser has returned after authenticating through GAE. Need to
 				// authenticate to Spring Security.
 				PreAuthenticatedAuthenticationToken token = new PreAuthenticatedAuthenticationToken(
 						user, null);

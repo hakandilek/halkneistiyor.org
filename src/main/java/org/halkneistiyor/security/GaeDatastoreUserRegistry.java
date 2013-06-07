@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.halkneistiyor.security.model.User;
+import org.halkneistiyor.security.model.SocialUser;
 import org.halkneistiyor.security.model.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -23,7 +23,7 @@ public class GaeDatastoreUserRegistry implements UserRegistry {
 	
 	// TODO: use a decent Data Access Layer
 	
-	private static final String USER_TYPE = User.class.getSimpleName();
+	private static final String USER_TYPE = SocialUser.class.getSimpleName();
 	private static final String USER_FIRSTNAME = "firstname";
 	private static final String USER_LASTNAME = "lastname";
 	private static final String USER_NICKNAME = "nickname";
@@ -31,7 +31,7 @@ public class GaeDatastoreUserRegistry implements UserRegistry {
 	private static final String USER_ENABLED = "enabled";
 	private static final String USER_AUTHORITIES = "authorities";
 
-	public User findUser(String userId) {
+	public SocialUser findUser(String userId) {
 		if (log.isDebugEnabled())
 			log.debug("findUser <- " + userId);
 		
@@ -57,7 +57,7 @@ public class GaeDatastoreUserRegistry implements UserRegistry {
 			String firstname = (String) user.getProperty(USER_FIRSTNAME);
 			String lastname = (String) user.getProperty(USER_LASTNAME);
 			Boolean enabled = (Boolean) user.getProperty(USER_ENABLED);
-			User u = new User();
+			SocialUser u = new SocialUser();
 			u.setKey(keyName);
 			u.setEmail(email);
 			u.setFirstname(firstname);
@@ -73,7 +73,7 @@ public class GaeDatastoreUserRegistry implements UserRegistry {
 		}
 	}
 
-	public void registerUser(User newUser) {
+	public void registerUser(SocialUser newUser) {
 		if (log.isDebugEnabled())
 			log.debug("registerUser <- " + newUser);
 		

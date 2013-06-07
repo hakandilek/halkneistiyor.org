@@ -2,12 +2,14 @@ package org.halkneistiyor.security;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.halkneistiyor.security.model.User;
+import org.halkneistiyor.security.model.SocialUser;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
+
+import com.google.appengine.api.users.User;
 
 public class GoogleAuthenticationProvider implements AuthenticationProvider {
 	private static Log log = LogFactory.getLog(GoogleAuthenticationProvider.class);
@@ -22,42 +24,42 @@ public class GoogleAuthenticationProvider implements AuthenticationProvider {
 		if (log.isDebugEnabled())
 			log.debug("authenticate <-");
 
-		com.google.appengine.api.users.User googleUser = null;
+		User googleUser = null;
 		String userKey = null;
 		Object principal = authentication.getPrincipal();
 		if (log.isDebugEnabled())
 			log.debug("principal : " + principal);
 
-		if (principal instanceof com.google.appengine.api.users.User) {
-			googleUser = (com.google.appengine.api.users.User) principal;
+		if (principal instanceof User) {
+			googleUser = (User) principal;
 			userKey = googleUser.getUserId();
 		}
 
-		if (principal instanceof User) {
-			User appUser = (User) principal;
+		if (principal instanceof SocialUser) {
+			SocialUser appUser = (SocialUser) principal;
 			userKey = appUser.getKey();
 		}
 
 		if (log.isDebugEnabled())
 			log.debug("userKey : " + userKey);
 
-		User user = userRegistry.findUser(userKey);
+		SocialUser socialUser = userRegistry.findUser(userKey);
 
-		if (user == null) {
-			// User not in registry. Needs to register
+		if (socialUser == null) {
+			// SocialUser not in registry. Needs to register
 			if (googleUser != null)
-				user = userFactory.fromGoogleUser(googleUser);
+				socialUser = userFactory.fromGoogleUser(googleUser);
 			else
-				user = (User) principal;
+				socialUser = (SocialUser) principal;
 		}
 
-		if (!user.isEnabled()) {
+		if (!socialUser.isEnabled()) {
 			if (log.isDebugEnabled())
-				log.debug("account is disabled:" + user);
+				log.debug("account is disabled:" + socialUser);
 			throw new DisabledException("Account is disabled");
 		}
 
-		return new UserAuthentication(user, authentication.getDetails());
+		return new UserAuthentication(socialUser, authentication.getDetails());
 	}
 
 	public final boolean supports(Class<?> authentication) {
