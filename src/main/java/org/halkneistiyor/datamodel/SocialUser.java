@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class SocialUser implements Serializable
 {
-    public static final String KIND = "SocialUser";
+    public static final String KIND = "User";
 
     private static final long serialVersionUID = 1L;
 
