@@ -6,7 +6,7 @@ import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestC
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import org.halkneistiyor.datamodel.RequestEntry;
 import org.halkneistiyor.datamodel.RequestManager;
-import org.halkneistiyor.datamodel.User;
+import org.halkneistiyor.datamodel.SocialUser;
 import org.halkneistiyor.datamodel.UserManager;
 import org.halkneistiyor.datamodel.Vote;
 import org.halkneistiyor.security.model.UserRole;
@@ -45,12 +45,12 @@ public class GaeDatastoreRequestManagerTest
     @Autowired
     UserManager userManager;
 
-    private static User user, user2, user3;
+    private static SocialUser user, user2, user3;
 
     @BeforeClass
     public static void setUpTest()
     {
-        user = new User();
+        user = new SocialUser();
         user.setEmail("test@halkneistiyor.org");
         user.setEnabled(true);
         user.setFirstName("TestName");
@@ -59,7 +59,7 @@ public class GaeDatastoreRequestManagerTest
         Set<UserRole> roles = EnumSet.of(UserRole.ADMIN, UserRole.USER);
         user.setRoles(roles);
 
-        user2 = new User();
+        user2 = new SocialUser();
         user2.setEmail("test@halkneistiyor.org");
         user2.setEnabled(true);
         user2.setFirstName("TestName");
@@ -68,7 +68,7 @@ public class GaeDatastoreRequestManagerTest
         Set<UserRole> roles2 = EnumSet.of(UserRole.ADMIN, UserRole.USER);
         user2.setRoles(roles2);
 
-        user3 = new User();
+        user3 = new SocialUser();
         user3.setEmail("test@halkneistiyor.org");
         user3.setEnabled(true);
         user3.setFirstName("TestName");

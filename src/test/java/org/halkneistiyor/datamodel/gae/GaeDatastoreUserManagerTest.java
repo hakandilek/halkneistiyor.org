@@ -7,7 +7,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
-import org.halkneistiyor.datamodel.User;
+import org.halkneistiyor.datamodel.SocialUser;
 import org.halkneistiyor.datamodel.UserManager;
 import org.halkneistiyor.security.model.UserRole;
 import org.junit.After;
@@ -56,7 +56,7 @@ public class GaeDatastoreUserManagerTest
     @Test
     public void testRegisterUser() throws Exception
     {
-        User user = new User();
+        SocialUser user = new SocialUser();
         user.setEmail("test@halkneistiyor.org");
         user.setEnabled(true);
         user.setFirstName("TestName");
@@ -69,7 +69,7 @@ public class GaeDatastoreUserManagerTest
 
         assertNotNull(userId);
         Key key = KeyFactory.stringToKey(userId);
-        assertEquals(User.KIND, key.getKind());
+        assertEquals(SocialUser.KIND, key.getKind());
 
         Entity entity = datastore.get(key);
         assertNotNull(entity);
@@ -80,7 +80,7 @@ public class GaeDatastoreUserManagerTest
         assertEquals("TestLastName", entity.getProperty(UserEntityBuilder.LAST_NAME));
         assertEquals("test", entity.getProperty(UserEntityBuilder.NICK_NAME));
         
-        User userFromEntity = UserEntityBuilder.getUser(entity);
+        SocialUser userFromEntity = UserEntityBuilder.getUser(entity);
         
         assertEquals(user.getEmail(), userFromEntity.getEmail());
         assertEquals(user.isEnabled(), userFromEntity.isEnabled());
@@ -89,7 +89,7 @@ public class GaeDatastoreUserManagerTest
         assertEquals(user.getNickname(), userFromEntity.getNickname());
         assertEquals(user.getRoles(), userFromEntity.getRoles());
         
-        User userFromManager = userManager.findUser(userId);
+        SocialUser userFromManager = userManager.findUser(userId);
         
         assertNotNull(userFromManager);
 
@@ -104,7 +104,7 @@ public class GaeDatastoreUserManagerTest
     @Test
     public void testGetUserByEmail()
     {
-        User user = new User();
+        SocialUser user = new SocialUser();
         user.setEmail("test@halkneistiyor.org");
         user.setEnabled(true);
         user.setFirstName("TestName");
@@ -117,7 +117,7 @@ public class GaeDatastoreUserManagerTest
 
         assertNotNull(userId);
 
-        User userByEmail = userManager.findUserByEmail("test@halkneistiyor.org");
+        SocialUser userByEmail = userManager.findUserByEmail("test@halkneistiyor.org");
         assertEquals(user.getEmail(), userByEmail.getEmail());
         assertEquals(user.isEnabled(), userByEmail.isEnabled());
         assertEquals(user.getFirstName(), userByEmail.getFirstName());

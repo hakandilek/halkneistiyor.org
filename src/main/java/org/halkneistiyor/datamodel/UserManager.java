@@ -2,11 +2,11 @@ package org.halkneistiyor.datamodel;
 
 public interface UserManager
 {
-	User findUser(String userId);
+	SocialUser findUser(String userId);
 
-	String registerUser(User newUser);
+	String registerUser(SocialUser newUser);
 
-    User findUserByEmail(String email);
+    SocialUser findUserByEmail(String email);
 
 	void removeUser(String userId);
 }

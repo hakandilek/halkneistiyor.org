@@ -4,7 +4,7 @@ import com.google.appengine.api.datastore.Email;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
-import org.halkneistiyor.datamodel.User;
+import org.halkneistiyor.datamodel.SocialUser;
 import org.halkneistiyor.security.model.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -26,9 +26,9 @@ public class UserEntityBuilder
     public static final String ENABLED = "enabled";
     public static final String PERMISSIONS = "permissions";
 
-    public static User getUser(Entity entity)
+    public static SocialUser getUser(Entity entity)
     {
-        User user = new User();
+        SocialUser user = new SocialUser();
         Key key = entity.getKey();
 
         if (key != null)
@@ -65,7 +65,7 @@ public class UserEntityBuilder
         return user;
     }
 
-    public static Entity toEntity(User user)
+    public static Entity toEntity(SocialUser user)
     {
         Entity entity;
 
@@ -75,7 +75,7 @@ public class UserEntityBuilder
         }
         else
         {
-            entity = new Entity(User.KIND);
+            entity = new Entity(SocialUser.KIND);
         }
 
         entity.setProperty(FIRST_NAME, user.getFirstName());

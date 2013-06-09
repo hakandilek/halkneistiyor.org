@@ -10,7 +10,7 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.halkneistiyor.datamodel.User;
+import org.halkneistiyor.datamodel.SocialUser;
 import org.halkneistiyor.datamodel.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,7 +21,7 @@ public class GaeDatastoreUserManager implements UserManager
 
     private final static Log log = LogFactory.getLog(GaeDatastoreUserManager.class);
 
-    public User findUser(String userId)
+    public SocialUser findUser(String userId)
     {
         if (log.isDebugEnabled())
         {
@@ -43,7 +43,7 @@ public class GaeDatastoreUserManager implements UserManager
         }
     }
 
-    public String registerUser(User newUser)
+    public String registerUser(SocialUser newUser)
     {
         if (log.isDebugEnabled())
         {
@@ -58,9 +58,9 @@ public class GaeDatastoreUserManager implements UserManager
     }
 
     @Override
-    public User findUserByEmail(String email)
+    public SocialUser findUserByEmail(String email)
     {
-        Query query = new Query(User.KIND);
+        Query query = new Query(SocialUser.KIND);
         query.setFilter(new Query.FilterPredicate(UserEntityBuilder.EMAIL, Query.FilterOperator.EQUAL, new Email(email)));
 
         PreparedQuery preparedQuery = datastore.prepare(query);
@@ -76,7 +76,7 @@ public class GaeDatastoreUserManager implements UserManager
 
     public void removeUser(String userId)
     {
-        Key key = KeyFactory.createKey(User.KIND, userId);
+        Key key = KeyFactory.createKey(SocialUser.KIND, userId);
 
         datastore.delete(key);
     }
