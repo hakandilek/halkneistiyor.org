@@ -1,6 +1,5 @@
 package org.halkneistiyor.security;
 
-import com.google.appengine.api.users.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.halkneistiyor.datamodel.SocialUser;
@@ -28,32 +27,32 @@ public class GoogleAuthenticationProvider implements AuthenticationProvider
             log.debug("authenticate <-");
         }
 
-        User googleUser = null;
-        String userEmail = null;
+        com.google.appengine.api.users.User googleUser = null;
+        String userKey = null;
         Object principal = authentication.getPrincipal();
         if (log.isDebugEnabled())
         {
             log.debug("principal : " + principal);
         }
 
-        if (principal instanceof User)
+        if (principal instanceof com.google.appengine.api.users.User)
         {
-            googleUser = (User) principal;
-            userEmail = googleUser.getEmail();
+            googleUser = (com.google.appengine.api.users.User) principal;
+            userKey = googleUser.getUserId();
         }
 
         if (principal instanceof SocialUser)
         {
             SocialUser appUser = (SocialUser) principal;
-            userEmail = appUser.getEmail();
+            userKey = appUser.getUserId();
         }
 
         if (log.isDebugEnabled())
         {
-            log.debug("userEmail : " + userEmail);
+            log.debug("userKey : " + userKey);
         }
 
-        SocialUser user = userManager.findUserByEmail(userEmail);
+        SocialUser user = userManager.findUser(userKey);
 
         if (user == null)
         {
@@ -95,4 +94,5 @@ public class GoogleAuthenticationProvider implements AuthenticationProvider
     {
         this.userFactory = userFactory;
     }
+
 }

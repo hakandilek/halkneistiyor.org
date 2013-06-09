@@ -34,6 +34,6 @@
 
     <bean id="googleAuthenticationProvider"
         class="org.halkneistiyor.security.GoogleAuthenticationProvider">
-
+        <property name="userManager" ref="userManager" />
     </bean>
 </beans>
