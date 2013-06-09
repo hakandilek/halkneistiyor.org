@@ -1,5 +1,11 @@
 package org.halkneistiyor.datamodel.gae;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.halkneistiyor.datamodel.SocialUser;
+import org.halkneistiyor.datamodel.UserManager;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.Email;
 import com.google.appengine.api.datastore.Entity;
@@ -8,11 +14,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.datamodel.UserManager;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.google.appengine.repackaged.com.google.common.base.Strings;
 
 public class GaeDatastoreUserManager implements UserManager
 {
@@ -60,6 +62,11 @@ public class GaeDatastoreUserManager implements UserManager
     @Override
     public SocialUser findUserByEmail(String email)
     {
+        if (Strings.isNullOrEmpty(email))
+        {
+            return null;
+        }
+
         Query query = new Query(SocialUser.KIND);
         query.setFilter(new Query.FilterPredicate(UserEntityBuilder.EMAIL, Query.FilterOperator.EQUAL, new Email(email)));
 
