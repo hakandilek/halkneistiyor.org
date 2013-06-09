@@ -6,8 +6,8 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.halkneistiyor.security.UserAuthentication;
+import org.halkneistiyor.datamodel.SocialUser;
 import org.halkneistiyor.datamodel.UserManager;
-import org.halkneistiyor.datamodel.User;
 import org.halkneistiyor.security.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -35,7 +35,7 @@ public class UserRegistrationController {
 
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
-		User currentUser = (User) authentication.getPrincipal();
+		SocialUser currentUser = (SocialUser) authentication.getPrincipal();
 		Set<UserRole> roles = EnumSet.of(UserRole.USER);
 
 		if (UserServiceFactory.getUserService().isUserAdmin()) {
@@ -48,7 +48,7 @@ public class UserRegistrationController {
 		String firstname = form.getFirstname();
 		String lastname = form.getLastname();
 		boolean enabled = true;
-		User u = new User();
+		SocialUser u = new SocialUser();
 		u.setUserId(key);
 		u.setEmail(email);
 		u.setFirstName(firstname);

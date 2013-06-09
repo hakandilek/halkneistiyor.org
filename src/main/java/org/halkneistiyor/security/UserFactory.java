@@ -1,11 +1,11 @@
 package org.halkneistiyor.security;
 
-import org.halkneistiyor.datamodel.User;
+import org.halkneistiyor.datamodel.SocialUser;
 
 public class UserFactory {
 
-	public User fromGoogleUser(com.google.appengine.api.users.User googleUser) {
-		User u = new User();
+	public SocialUser fromGoogleUser(com.google.appengine.api.users.User googleUser) {
+		SocialUser u = new SocialUser();
 		u.setEnabled(true);
 		u.setEmail(googleUser.getEmail());
 		u.setUserId(googleUser.getUserId());

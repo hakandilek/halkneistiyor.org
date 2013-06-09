@@ -3,7 +3,7 @@ package org.halkneistiyor.security;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.halkneistiyor.datamodel.UserManager;
-import org.halkneistiyor.datamodel.User;
+import org.halkneistiyor.datamodel.SocialUser;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.Authentication;
@@ -34,22 +34,22 @@ public class GoogleAuthenticationProvider implements AuthenticationProvider {
 			userKey = googleUser.getUserId();
 		}
 
-		if (principal instanceof User) {
-			User appUser = (User) principal;
+		if (principal instanceof SocialUser) {
+            SocialUser appUser = (SocialUser) principal;
 			userKey = appUser.getUserId();
 		}
 
 		if (log.isDebugEnabled())
 			log.debug("userKey : " + userKey);
 
-		User user = userManager.findUser(userKey);
+        SocialUser user = userManager.findUser(userKey);
 
 		if (user == null) {
 			// User not in registry. Needs to register
 			if (googleUser != null)
 				user = userFactory.fromGoogleUser(googleUser);
 			else
-				user = (User) principal;
+				user = (SocialUser) principal;
 		}
 
 		if (!user.isEnabled()) {

@@ -5,9 +5,9 @@ import org.halkneistiyor.security.model.UserRole;
 import java.io.Serializable;
 import java.util.Set;
 
-public class User implements Serializable
+public class SocialUser implements Serializable
 {
-    public static final String KIND = "User";
+    public static final String KIND = "SocialUser";
 
     private static final long serialVersionUID = 1L;
 
@@ -110,7 +110,7 @@ public class User implements Serializable
             return false;
         }
 
-        User user = (User) o;
+        SocialUser user = (SocialUser) o;
 
         return !(userId != null ? !userId.equals(user.userId) : user.userId != null);
     }

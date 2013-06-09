@@ -2,7 +2,7 @@ package org.halkneistiyor.security;
 
 import java.util.Collection;
 
-import org.halkneistiyor.datamodel.User;
+import org.halkneistiyor.datamodel.SocialUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
@@ -12,11 +12,11 @@ public class UserAuthentication extends PreAuthenticatedAuthenticationToken
 
 	private static final long serialVersionUID = 1L;
 
-	public UserAuthentication(User principal, Object credentials) {
+	public UserAuthentication(SocialUser principal, Object credentials) {
 		super(principal, credentials);
 	}
 
-	public UserAuthentication(User principal, Object credentials,
+	public UserAuthentication(SocialUser principal, Object credentials,
 			Collection<? extends GrantedAuthority> authorities) {
 		super(principal, credentials, authorities);
 	}
