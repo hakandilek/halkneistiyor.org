@@ -10,8 +10,10 @@
     <import resource="mvc-context.xml"/>
     <import resource="data-context.xml"/>
     <import resource="security-context.xml"/>
+    <import resource="social-context.xml"/>
 
     <context:component-scan base-package="org.halkneistiyor.web"/>
     <context:component-scan base-package="org.halkneistiyor.security.web"/>
+    <context:component-scan base-package="org.halkneistiyor.social.signin"/>
 
 </beans>

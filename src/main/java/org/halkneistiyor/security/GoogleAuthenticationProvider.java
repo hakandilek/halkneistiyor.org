@@ -12,11 +12,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 
-public class GoogleAuthenticationProvider implements AuthenticationProvider
-{
-    private static Log log = LogFactory.getLog(GoogleAuthenticationProvider.class);
+public class GoogleAuthenticationProvider implements AuthenticationProvider {
+	
+	private static Log log = LogFactory.getLog(GoogleAuthenticationProvider.class);
 
-    @Autowired
+	@Autowired
     UserManager userManager;
 
     UserFactory userFactory = new UserFactory();
@@ -97,4 +97,5 @@ public class GoogleAuthenticationProvider implements AuthenticationProvider
     {
         this.userFactory = userFactory;
     }
+
 }
