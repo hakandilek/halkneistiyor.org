@@ -34,10 +34,6 @@
 
     <bean id="googleAuthenticationProvider"
         class="org.halkneistiyor.security.GoogleAuthenticationProvider">
-        <property name="userRegistry" ref="userRegistry" />
+        <property name="userManager" ref="userManager" />
     </bean>
-
-    <!-- TODO: replace with a decent user registry -->
-    <bean id="userRegistry" class="org.halkneistiyor.security.GaeDatastoreUserRegistry" />
-
 </beans>

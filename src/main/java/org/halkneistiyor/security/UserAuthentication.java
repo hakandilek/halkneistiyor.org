@@ -2,7 +2,7 @@ package org.halkneistiyor.security;
 
 import java.util.Collection;
 
-import org.halkneistiyor.security.model.User;
+import org.halkneistiyor.datamodel.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;

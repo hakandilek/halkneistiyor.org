@@ -1,6 +1,6 @@
 package org.halkneistiyor.security;
 
-import org.halkneistiyor.security.model.User;
+import org.halkneistiyor.datamodel.User;
 
 public class UserFactory {
 
@@ -8,7 +8,7 @@ public class UserFactory {
 		User u = new User();
 		u.setEnabled(true);
 		u.setEmail(googleUser.getEmail());
-		u.setKey(googleUser.getUserId());
+		u.setUserId(googleUser.getUserId());
 		u.setNickname(googleUser.getNickname());
 		return u;
 	}

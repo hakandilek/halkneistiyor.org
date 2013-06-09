@@ -5,6 +5,12 @@
     <bean id="datastoreService" class="com.google.appengine.api.datastore.DatastoreServiceFactory"
           factory-method="getDatastoreService"/>
 
+    <bean id="memcacheService" class="com.google.appengine.api.memcache.MemcacheServiceFactory"
+          factory-method="getAsyncMemcacheService"/>
+
     <import resource="security-context.xml"/>
-    
+
+    <bean id="requestManager" class="org.halkneistiyor.datamodel.gae.GaeDatastoreRequestManager"/>
+
+    <bean id="userManager" class="org.halkneistiyor.datamodel.gae.GaeDatastoreUserManager" />
 </beans>

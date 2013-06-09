@@ -2,7 +2,8 @@ package org.halkneistiyor.security;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.halkneistiyor.security.model.User;
+import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.User;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.Authentication;
@@ -12,7 +13,7 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 public class GoogleAuthenticationProvider implements AuthenticationProvider {
 	private static Log log = LogFactory.getLog(GoogleAuthenticationProvider.class);
 	
-	UserRegistry userRegistry;
+	UserManager userManager;
 
 	UserFactory userFactory = new UserFactory();
 
@@ -35,13 +36,13 @@ public class GoogleAuthenticationProvider implements AuthenticationProvider {
 
 		if (principal instanceof User) {
 			User appUser = (User) principal;
-			userKey = appUser.getKey();
+			userKey = appUser.getUserId();
 		}
 
 		if (log.isDebugEnabled())
 			log.debug("userKey : " + userKey);
 
-		User user = userRegistry.findUser(userKey);
+		User user = userManager.findUser(userKey);
 
 		if (user == null) {
 			// User not in registry. Needs to register
@@ -65,8 +66,8 @@ public class GoogleAuthenticationProvider implements AuthenticationProvider {
 				.isAssignableFrom(authentication);
 	}
 
-	public void setUserRegistry(UserRegistry userRegistry) {
-		this.userRegistry = userRegistry;
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
 	}
 
 	public void setUserFactory(UserFactory userFactory) {

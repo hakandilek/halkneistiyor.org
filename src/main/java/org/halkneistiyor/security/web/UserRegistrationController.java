@@ -6,8 +6,8 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.halkneistiyor.security.UserAuthentication;
-import org.halkneistiyor.security.UserRegistry;
-import org.halkneistiyor.security.model.User;
+import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.User;
 import org.halkneistiyor.security.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,7 +24,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 public class UserRegistrationController {
 
 	@Autowired
-	private UserRegistry registry;
+	private UserManager registry;
 
 	@RequestMapping(value = "/security/register", method = RequestMethod.POST)
 	public String register(@Valid UserRegistrationForm form,
@@ -42,17 +42,17 @@ public class UserRegistrationController {
 			roles.add(UserRole.ADMIN);
 		}
 
-		String key = currentUser.getKey();
+		String key = currentUser.getUserId();
 		String nickname = currentUser.getNickname();
 		String email = currentUser.getEmail();
 		String firstname = form.getFirstname();
 		String lastname = form.getLastname();
 		boolean enabled = true;
 		User u = new User();
-		u.setKey(key);
+		u.setUserId(key);
 		u.setEmail(email);
-		u.setFirstname(firstname);
-		u.setLastname(lastname);
+		u.setFirstName(firstname);
+		u.setLastName(lastname);
 		u.setNickname(nickname);
 		u.setEnabled(enabled);
 
