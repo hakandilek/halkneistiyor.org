@@ -19,8 +19,8 @@
     <facebook:config app-id="${facebook.clientId}" app-secret="${facebook.clientSecret}" app-namespace="socialshowcase" />
     <twitter:config app-id="${twitter.consumerKey}" app-secret="${twitter.consumerSecret}"/>
 
-    <!-- TODO:implement custom connection repository -->
-    <social:in-memory-connection-repository/> 
+    <!-- custom connection repository -->
+    <bean id="usersConnectionRepository" class="org.halkneistiyor.social.connection.GaeUsersConnectionRepository"/>
 
     <bean id="userIdSource" class="org.springframework.social.security.AuthenticationNameUserIdSource" />
 

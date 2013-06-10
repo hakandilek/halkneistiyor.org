@@ -1,6 +1,7 @@
 package org.halkneistiyor.security;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.After;
 import org.junit.Before;
@@ -9,8 +10,6 @@ import org.mockito.MockitoAnnotations;
 
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.google.appengine.tools.development.testing.LocalUserServiceTestConfig;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
 
 public class GoogleAuthenticationProviderTest {
 	GoogleAuthenticationProvider provider = new GoogleAuthenticationProvider();
