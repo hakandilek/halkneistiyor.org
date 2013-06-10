@@ -8,7 +8,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.SocialUserManager;
 import org.halkneistiyor.security.model.UserRole;
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +36,7 @@ public class GaeDatastoreUserManagerTest
         new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
 
     @Autowired
-    UserManager userManager;
+    SocialUserManager userManager;
     
     @Autowired
     DatastoreService datastore;

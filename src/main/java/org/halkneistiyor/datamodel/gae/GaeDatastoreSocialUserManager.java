@@ -3,7 +3,7 @@ package org.halkneistiyor.datamodel.gae;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.SocialUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -16,12 +16,12 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.common.base.Strings;
 
-public class GaeDatastoreUserManager implements UserManager
+public class GaeDatastoreSocialUserManager implements SocialUserManager
 {
     @Autowired
     DatastoreService datastore;
 
-    private final static Log log = LogFactory.getLog(GaeDatastoreUserManager.class);
+    private final static Log log = LogFactory.getLog(GaeDatastoreSocialUserManager.class);
 
     public SocialUser findUser(String userId)
     {

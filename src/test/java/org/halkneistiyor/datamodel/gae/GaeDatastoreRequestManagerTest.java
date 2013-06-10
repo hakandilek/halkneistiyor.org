@@ -7,7 +7,7 @@ import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import org.halkneistiyor.datamodel.RequestEntry;
 import org.halkneistiyor.datamodel.RequestManager;
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.SocialUserManager;
 import org.halkneistiyor.datamodel.Vote;
 import org.halkneistiyor.security.model.UserRole;
 import org.junit.After;
@@ -43,7 +43,7 @@ public class GaeDatastoreRequestManagerTest
     RequestManager requestManager;
 
     @Autowired
-    UserManager userManager;
+    SocialUserManager userManager;
 
     private static SocialUser user, user2, user3;
 

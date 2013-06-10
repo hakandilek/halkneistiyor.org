@@ -4,7 +4,7 @@ import com.google.appengine.api.users.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.SocialUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.DisabledException;
@@ -17,7 +17,7 @@ public class GoogleAuthenticationProvider implements AuthenticationProvider {
 	private static Log log = LogFactory.getLog(GoogleAuthenticationProvider.class);
 
 	@Autowired
-    UserManager userManager;
+    SocialUserManager userManager;
 
     UserFactory userFactory = new UserFactory();
 
@@ -88,7 +88,7 @@ public class GoogleAuthenticationProvider implements AuthenticationProvider {
             .isAssignableFrom(authentication);
     }
 
-    public void setUserManager(UserManager userManager)
+    public void setUserManager(SocialUserManager userManager)
     {
         this.userManager = userManager;
     }

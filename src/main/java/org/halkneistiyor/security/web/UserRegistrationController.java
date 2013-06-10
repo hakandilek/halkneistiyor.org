@@ -7,7 +7,7 @@ import javax.validation.Valid;
 
 import org.halkneistiyor.security.UserAuthentication;
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.SocialUserManager;
 import org.halkneistiyor.security.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,7 +24,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 public class UserRegistrationController {
 
 	@Autowired
-	UserManager registry;
+	SocialUserManager registry;
 
 	@RequestMapping(value = "/security/register", method = RequestMethod.POST)
 	public String register(@Valid UserRegistrationForm form,
@@ -58,7 +58,7 @@ public class UserRegistrationController {
 		return "redirect:/";
 	}
 
-	public void setRegistry(UserManager registry) {
+	public void setRegistry(SocialUserManager registry) {
 		this.registry = registry;
 	}
 

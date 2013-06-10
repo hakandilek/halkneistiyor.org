@@ -10,6 +10,6 @@
 
     <bean id="requestManager" class="org.halkneistiyor.datamodel.gae.GaeDatastoreRequestManager"/>
 
-    <bean id="userManager" class="org.halkneistiyor.datamodel.gae.GaeDatastoreUserManager" />
+    <bean id="userManager" class="org.halkneistiyor.datamodel.gae.GaeDatastoreSocialUserManager" />
 
 </beans>

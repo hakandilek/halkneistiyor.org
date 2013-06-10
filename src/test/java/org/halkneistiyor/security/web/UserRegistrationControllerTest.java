@@ -5,7 +5,7 @@ import static org.mockito.Mockito.when;
 
 
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.SocialUserManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class UserRegistrationControllerTest {
 	UserRegistrationController controller;
 
 	@Mock
-	UserManager mockRegistry;
+	SocialUserManager mockRegistry;
 
 	@Mock
 	BindingResult mockResult;
