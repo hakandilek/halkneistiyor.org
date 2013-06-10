@@ -23,6 +23,7 @@
         <s:intercept-url pattern="/signin/**" access="permitAll" />
         <s:intercept-url pattern="/signup/**" access="permitAll" />
         <s:intercept-url pattern="/disconnect/facebook" access="permitAll" />
+        <s:intercept-url pattern="/schema/social/**" access="permitAll" />
         <s:intercept-url pattern="/**" access="isAuthenticated()"  />
     </s:http>
 <!-- 

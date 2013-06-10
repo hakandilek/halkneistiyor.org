@@ -17,6 +17,7 @@
     <mvc:resources mapping="/js/**" location="/js/"/>
     <mvc:resources mapping="/img/**" location="/img/"/>
     <mvc:resources mapping="/*.ico" location="/"/>
+    <mvc:resources mapping="/schema/social/**" location="/schema/social/" />
 
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="contentNegotiationManager" ref="cnManager"/>

@@ -16,14 +16,22 @@ import com.google.appengine.repackaged.com.google.common.base.Strings;
 
 public class GaeUsersConnectionRepository implements UsersConnectionRepository {
 
-	@Autowired
 	ConnectionFactoryLocator connectionFactoryLocator;
 
-	@Autowired
 	TextEncryptor textEncryptor;
 
-	@Autowired
 	SocialConnectionManager socialConnectionManager;
+
+	@Autowired
+	public GaeUsersConnectionRepository(
+			ConnectionFactoryLocator connectionFactoryLocator,
+			TextEncryptor textEncryptor,
+			SocialConnectionManager socialConnectionManager) {
+		super();
+		this.connectionFactoryLocator = connectionFactoryLocator;
+		this.textEncryptor = textEncryptor;
+		this.socialConnectionManager = socialConnectionManager;
+	}
 
 	@Override
 	public List<String> findUserIdsWithConnection(Connection<?> connection) {
@@ -39,18 +47,19 @@ public class GaeUsersConnectionRepository implements UsersConnectionRepository {
 	@Override
 	public Set<String> findUserIdsConnectedTo(String providerId,
 			Set<String> providerUserIds) {
-		Set<String> userIds = socialConnectionManager.findUserIdsConnectedTo(providerId, providerUserIds);
+		Set<String> userIds = socialConnectionManager.findUserIdsConnectedTo(
+				providerId, providerUserIds);
 		return userIds;
 	}
 
 	@Override
 	public ConnectionRepository createConnectionRepository(String userId) {
-        if (Strings.isNullOrEmpty(userId))
-        {
-            return null;
-        }
-        
-		return new GaeConnectionRepository(userId, connectionFactoryLocator, textEncryptor, socialConnectionManager);
+		if (Strings.isNullOrEmpty(userId)) {
+			return null;
+		}
+
+		return new GaeConnectionRepository(userId, connectionFactoryLocator,
+				textEncryptor, socialConnectionManager);
 	}
 
 }

@@ -11,5 +11,7 @@
     <bean id="requestManager" class="org.halkneistiyor.datamodel.gae.GaeDatastoreRequestManager"/>
 
     <bean id="userManager" class="org.halkneistiyor.datamodel.gae.GaeDatastoreSocialUserManager" />
+    
+    <bean id="socialConnectionManager" class="org.halkneistiyor.datamodel.gae.GaeSocialConnectionManager"/>
 
 </beans>

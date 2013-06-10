@@ -37,10 +37,7 @@ public class GaeUsersConnectionRepositoryTest {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		repository = new GaeUsersConnectionRepository();
-		repository.connectionFactoryLocator = mockConnectionFactoryLocator;
-		repository.socialConnectionManager = mockSocialConnectionManager;
-		repository.textEncryptor = mockTextEncryptor;
+		repository = new GaeUsersConnectionRepository(mockConnectionFactoryLocator, mockTextEncryptor, mockSocialConnectionManager);
 	}
 
 	@After
