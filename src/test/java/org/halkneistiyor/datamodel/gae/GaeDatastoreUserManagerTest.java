@@ -1,5 +1,7 @@
 package org.halkneistiyor.datamodel.gae;
 
+import static org.junit.Assert.*;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.Email;
 import com.google.appengine.api.datastore.Entity;
@@ -20,9 +22,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.EnumSet;
 import java.util.Set;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
 
 /**
  * @author Erdinc Yilmazel (eyilmazel@tripadvisor.com)
