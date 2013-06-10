@@ -23,7 +23,6 @@
 
     <!-- custom connection repository -->
     <bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors" factory-method="noOpText"/>
-    <bean id="connectionFactoryLocator" class="org.springframework.social.security.SocialAuthenticationServiceRegistry"/>
     <hni:gae-connection-repository />
 
     <bean id="userIdSource" class="org.springframework.social.security.AuthenticationNameUserIdSource" />
