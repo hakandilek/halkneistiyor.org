@@ -14,7 +14,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.repackaged.com.google.common.base.Strings;
+import com.google.common.base.Strings;
 
 public class GaeDatastoreUserManager implements UserManager
 {
