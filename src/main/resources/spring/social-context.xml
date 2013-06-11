@@ -30,6 +30,6 @@
     <bean id="connectController" class="org.springframework.social.connect.web.ConnectController" autowire="constructor" />
     
     <bean id="psc" class="org.springframework.social.connect.web.ProviderSignInController" autowire="constructor" />        
-    <bean id="signInAdapter" class="org.halkneistiyor.social.signin.SimpleSignInAdapter" autowire="constructor" />
+    <bean id="signInAdapter" class="org.halkneistiyor.social.web.SimpleSignInAdapter" autowire="constructor" />
 
 </beans>

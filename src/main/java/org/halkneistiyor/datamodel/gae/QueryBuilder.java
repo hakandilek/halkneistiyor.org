@@ -64,6 +64,7 @@ public class QueryBuilder<M> {
 		PreparedQuery pq = prepare(datastore);
 		ArrayList<M> l = Lists.newArrayList();
 		Iterable<Entity> it = pq.asIterable();
+		if (it == null) return null;
 		for (Entity e : it) {
 			l.add(entityBuilder.buildModel(e));
 		}
@@ -73,6 +74,7 @@ public class QueryBuilder<M> {
 	public M single(DatastoreService datastore) {
 		PreparedQuery pq = prepare(datastore);
 		Entity e = pq.asSingleEntity();
+		if (e == null) return null;
 		M m = entityBuilder.buildModel(e);
 		return m;
 	}

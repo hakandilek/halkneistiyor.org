@@ -1,4 +1,4 @@
-package org.halkneistiyor.social.signin;
+package org.halkneistiyor.social.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

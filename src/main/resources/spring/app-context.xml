@@ -14,6 +14,6 @@
 
     <context:component-scan base-package="org.halkneistiyor.web"/>
     <context:component-scan base-package="org.halkneistiyor.security.web"/>
-    <context:component-scan base-package="org.halkneistiyor.social.signin"/>
+    <context:component-scan base-package="org.halkneistiyor.social.web"/>
 
 </beans>
