@@ -7,7 +7,7 @@ import javax.validation.Valid;
 
 import org.halkneistiyor.security.UserAuthentication;
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.SocialUserManager;
 import org.halkneistiyor.security.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,7 +24,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 public class UserRegistrationController {
 
 	@Autowired
-	private UserManager registry;
+	SocialUserManager registry;
 
 	@RequestMapping(value = "/security/register", method = RequestMethod.POST)
 	public String register(@Valid UserRegistrationForm form,
@@ -42,27 +42,24 @@ public class UserRegistrationController {
 			roles.add(UserRole.ADMIN);
 		}
 
-		String key = currentUser.getUserId();
-		String nickname = currentUser.getNickname();
-		String email = currentUser.getEmail();
 		String firstname = form.getFirstname();
 		String lastname = form.getLastname();
 		boolean enabled = true;
-		SocialUser u = new SocialUser();
-		u.setUserId(key);
-		u.setEmail(email);
-		u.setFirstName(firstname);
-		u.setLastName(lastname);
-		u.setNickname(nickname);
-		u.setEnabled(enabled);
+		currentUser.setFirstName(firstname);
+		currentUser.setLastName(lastname);
+		currentUser.setEnabled(enabled);
 
-		registry.registerUser(u);
+		registry.registerUser(currentUser);
 
 		// Update the context with the full authentication
-		context.setAuthentication(new UserAuthentication(u, authentication
+		context.setAuthentication(new UserAuthentication(currentUser, authentication
 				.getDetails()));
 
 		return "redirect:/";
+	}
+
+	public void setRegistry(SocialUserManager registry) {
+		this.registry = registry;
 	}
 
 }

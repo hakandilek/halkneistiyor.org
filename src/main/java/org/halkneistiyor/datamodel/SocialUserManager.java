@@ -1,6 +1,6 @@
 package org.halkneistiyor.datamodel;
 
-public interface UserManager
+public interface SocialUserManager
 {
 	SocialUser findUser(String userId);
 

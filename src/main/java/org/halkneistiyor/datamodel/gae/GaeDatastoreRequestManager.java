@@ -33,7 +33,7 @@ public class GaeDatastoreRequestManager implements RequestManager
     @Autowired
     AsyncMemcacheService memcacheService;
 
-    private final static Log log = LogFactory.getLog(GaeDatastoreUserManager.class);
+    private final static Log log = LogFactory.getLog(GaeDatastoreSocialUserManager.class);
 
     @Override
     public String addRequest(RequestEntry entry) throws Exception

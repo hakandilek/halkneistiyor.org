@@ -17,7 +17,7 @@ import java.util.Set;
  * @author Erdinc Yilmazel (eyilmazel@tripadvisor.com)
  * @since 6/8/13
  */
-public class UserEntityBuilder
+public class SocialUserEntityBuilder
 {
     public static final String FIRST_NAME = "firstName";
     public static final String LAST_NAME = "lastName";

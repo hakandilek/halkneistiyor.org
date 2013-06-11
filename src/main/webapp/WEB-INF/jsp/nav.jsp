@@ -11,6 +11,8 @@
                     <li><a href="#">En yeni talepler</a></li>
                     <li><a href="#">Hakkımızda</a></li>
                     <li><a href="#">İletişim</a></li>
+                    <li><a href="/connect">Welcome, <c:out value="${account.firstName}"/>!</a></li>
+					<li><a href="/signout">Sign Out</a></li>
                 </ul>
             </div>
         </div>

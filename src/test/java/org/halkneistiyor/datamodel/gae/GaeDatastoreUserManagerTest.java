@@ -1,5 +1,7 @@
 package org.halkneistiyor.datamodel.gae;
 
+import static org.junit.Assert.*;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.Email;
 import com.google.appengine.api.datastore.Entity;
@@ -8,7 +10,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.SocialUserManager;
 import org.halkneistiyor.security.model.UserRole;
 import org.junit.After;
 import org.junit.Before;
@@ -20,9 +22,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.EnumSet;
 import java.util.Set;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
 
 /**
  * @author Erdinc Yilmazel (eyilmazel@tripadvisor.com)
@@ -36,7 +35,7 @@ public class GaeDatastoreUserManagerTest
         new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
 
     @Autowired
-    UserManager userManager;
+    SocialUserManager userManager;
     
     @Autowired
     DatastoreService datastore;
@@ -74,13 +73,13 @@ public class GaeDatastoreUserManagerTest
         Entity entity = datastore.get(key);
         assertNotNull(entity);
         
-        assertEquals(new Email("test@halkneistiyor.org"), entity.getProperty(UserEntityBuilder.EMAIL));
-        assertEquals(true, entity.getProperty(UserEntityBuilder.ENABLED));
-        assertEquals("TestName", entity.getProperty(UserEntityBuilder.FIRST_NAME));
-        assertEquals("TestLastName", entity.getProperty(UserEntityBuilder.LAST_NAME));
-        assertEquals("test", entity.getProperty(UserEntityBuilder.NICK_NAME));
+        assertEquals(new Email("test@halkneistiyor.org"), entity.getProperty(SocialUserEntityBuilder.EMAIL));
+        assertEquals(true, entity.getProperty(SocialUserEntityBuilder.ENABLED));
+        assertEquals("TestName", entity.getProperty(SocialUserEntityBuilder.FIRST_NAME));
+        assertEquals("TestLastName", entity.getProperty(SocialUserEntityBuilder.LAST_NAME));
+        assertEquals("test", entity.getProperty(SocialUserEntityBuilder.NICK_NAME));
         
-        SocialUser userFromEntity = UserEntityBuilder.getUser(entity);
+        SocialUser userFromEntity = SocialUserEntityBuilder.getUser(entity);
         
         assertEquals(user.getEmail(), userFromEntity.getEmail());
         assertEquals(user.isEnabled(), userFromEntity.isEnabled());

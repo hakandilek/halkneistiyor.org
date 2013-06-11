@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s="http://www.springframework.org/schema/security"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security 
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <s:http pattern="/resources/**" security="none" />
+
+    <s:http use-expressions="true">
+        <!-- Authentication policy -->
+        <s:form-login login-page="/signin" login-processing-url="/signin/authenticate" authentication-failure-url="/signin?param.error=bad_credentials" />
+        <s:logout logout-url="/signout" delete-cookies="JSESSIONID" />
+
+        <s:intercept-url pattern="/" access="permitAll" />
+        <s:intercept-url pattern="/_ah/login" access="permitAll" />
+        <s:intercept-url pattern="/favicon.ico" access="permitAll" />
+        <s:intercept-url pattern="/resources/**" access="permitAll" />
+        <s:intercept-url pattern="/signin/**" access="permitAll" />
+        <s:intercept-url pattern="/signup/**" access="permitAll" />
+        <s:intercept-url pattern="/disconnect/facebook" access="permitAll" />
+        <s:intercept-url pattern="/schema/social/**" access="permitAll" />
+        <s:intercept-url pattern="/**" access="isAuthenticated()"  />
+    </s:http>
+<!-- 
     <s:http use-expressions="true" entry-point-ref="googleEntryPoint">
         
         <s:intercept-url pattern="/" access="permitAll" />
@@ -18,7 +41,7 @@
         <s:logout />
 
     </s:http>
-
+ -->
     <s:authentication-manager alias="authenticationManager">
         <s:authentication-provider ref="googleAuthenticationProvider" />
         <!-- TODO: other prodivers -->

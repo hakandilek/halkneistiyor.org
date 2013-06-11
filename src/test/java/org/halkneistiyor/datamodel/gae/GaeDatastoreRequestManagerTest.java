@@ -1,5 +1,7 @@
 package org.halkneistiyor.datamodel.gae;
 
+import static org.junit.Assert.*;
+
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
@@ -7,7 +9,7 @@ import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import org.halkneistiyor.datamodel.RequestEntry;
 import org.halkneistiyor.datamodel.RequestManager;
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.SocialUserManager;
 import org.halkneistiyor.datamodel.Vote;
 import org.halkneistiyor.security.model.UserRole;
 import org.junit.After;
@@ -22,11 +24,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 /**
  * @author Erdinc Yilmazel (eyilmazel@tripadvisor.com)
@@ -43,7 +40,7 @@ public class GaeDatastoreRequestManagerTest
     RequestManager requestManager;
 
     @Autowired
-    UserManager userManager;
+    SocialUserManager userManager;
 
     private static SocialUser user, user2, user3;
 

@@ -3,7 +3,7 @@ package org.halkneistiyor.datamodel.gae;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.datamodel.UserManager;
+import org.halkneistiyor.datamodel.SocialUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -14,14 +14,14 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.repackaged.com.google.common.base.Strings;
+import com.google.common.base.Strings;
 
-public class GaeDatastoreUserManager implements UserManager
+public class GaeDatastoreSocialUserManager implements SocialUserManager
 {
     @Autowired
     DatastoreService datastore;
 
-    private final static Log log = LogFactory.getLog(GaeDatastoreUserManager.class);
+    private final static Log log = LogFactory.getLog(GaeDatastoreSocialUserManager.class);
 
     public SocialUser findUser(String userId)
     {
@@ -36,7 +36,7 @@ public class GaeDatastoreUserManager implements UserManager
         {
             Entity user = datastore.get(key);
 
-            return UserEntityBuilder.getUser(user);
+            return SocialUserEntityBuilder.getUser(user);
         }
         catch (EntityNotFoundException e)
         {
@@ -52,7 +52,7 @@ public class GaeDatastoreUserManager implements UserManager
             log.debug("registerUser <- " + newUser);
         }
 
-        Entity user = UserEntityBuilder.toEntity(newUser);
+        Entity user = SocialUserEntityBuilder.toEntity(newUser);
         String userId = KeyFactory.keyToString(datastore.put(user));
 
         newUser.setUserId(userId);
@@ -68,7 +68,7 @@ public class GaeDatastoreUserManager implements UserManager
         }
 
         Query query = new Query(SocialUser.KIND);
-        query.setFilter(new Query.FilterPredicate(UserEntityBuilder.EMAIL, Query.FilterOperator.EQUAL, new Email(email)));
+        query.setFilter(new Query.FilterPredicate(SocialUserEntityBuilder.EMAIL, Query.FilterOperator.EQUAL, new Email(email)));
 
         PreparedQuery preparedQuery = datastore.prepare(query);
         Entity entity = preparedQuery.asSingleEntity();
@@ -78,7 +78,7 @@ public class GaeDatastoreUserManager implements UserManager
             return null;
         }
 
-        return UserEntityBuilder.getUser(entity);
+        return SocialUserEntityBuilder.getUser(entity);
     }
 
     public void removeUser(String userId)
