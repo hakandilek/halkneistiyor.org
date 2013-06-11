@@ -17,13 +17,16 @@ public interface SocialConnectionManager {
 	Collection<SocialConnection> findConnectionsByUserIdAndProviderId(String userId,
 			String providerId);
 
+	Collection<SocialConnection> findConnectionsByUserIdAndProviderIdForProviderUserIds(String userId,
+			String providerId, Set<String> providerUserIds);
+
 	SocialConnection getConnectionByUserIdAndProviderId(String userId,
 			String providerId, String providerUserId);
 
 	SocialConnection getConnectionByUserIdProviderIdAndRank(String userId,
-			String providerId, Integer rank);
+			String providerId, Long rank);
 
-	void create(SocialConnection sc);
+	String create(SocialConnection sc);
 
 	void update(SocialConnection sc);
 
@@ -31,6 +34,4 @@ public interface SocialConnectionManager {
 
 	void delete(SocialConnection sc);
 
-	Collection<SocialConnection> findConnectionsByUserIdAndProviderIdForProviderUserIds(String userId,
-			String providerId, Collection<String> providerUserIds);
 }

@@ -73,13 +73,13 @@ public class GaeDatastoreUserManagerTest
         Entity entity = datastore.get(key);
         assertNotNull(entity);
         
-        assertEquals(new Email("test@halkneistiyor.org"), entity.getProperty(UserEntityBuilder.EMAIL));
-        assertEquals(true, entity.getProperty(UserEntityBuilder.ENABLED));
-        assertEquals("TestName", entity.getProperty(UserEntityBuilder.FIRST_NAME));
-        assertEquals("TestLastName", entity.getProperty(UserEntityBuilder.LAST_NAME));
-        assertEquals("test", entity.getProperty(UserEntityBuilder.NICK_NAME));
+        assertEquals(new Email("test@halkneistiyor.org"), entity.getProperty(SocialUserEntityBuilder.EMAIL));
+        assertEquals(true, entity.getProperty(SocialUserEntityBuilder.ENABLED));
+        assertEquals("TestName", entity.getProperty(SocialUserEntityBuilder.FIRST_NAME));
+        assertEquals("TestLastName", entity.getProperty(SocialUserEntityBuilder.LAST_NAME));
+        assertEquals("test", entity.getProperty(SocialUserEntityBuilder.NICK_NAME));
         
-        SocialUser userFromEntity = UserEntityBuilder.getUser(entity);
+        SocialUser userFromEntity = SocialUserEntityBuilder.getUser(entity);
         
         assertEquals(user.getEmail(), userFromEntity.getEmail());
         assertEquals(user.isEnabled(), userFromEntity.isEnabled());

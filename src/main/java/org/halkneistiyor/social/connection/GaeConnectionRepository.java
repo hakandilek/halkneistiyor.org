@@ -24,6 +24,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import com.google.appengine.repackaged.com.google.common.collect.Lists;
+import com.google.appengine.repackaged.com.google.common.collect.Sets;
 
 public class GaeConnectionRepository implements ConnectionRepository {
 
@@ -103,7 +104,7 @@ public class GaeConnectionRepository implements ConnectionRepository {
 
 		Set<String> providerIds = providerUserIds.keySet();
 		for (String providerId : providerIds) {
-			List<String> providerUserId = providerUserIds.get(providerId);
+			Set<String> providerUserId = Sets.newHashSet(providerUserIds.get(providerId));
 			Collection<SocialConnection> connections = socialConnectionManager
 					.findConnectionsByUserIdAndProviderIdForProviderUserIds(
 							userId, providerId, providerUserId);
@@ -190,8 +191,8 @@ public class GaeConnectionRepository implements ConnectionRepository {
 
 		// find the rank
 		SocialConnection sc = socialConnectionManager
-				.getConnectionByUserIdProviderIdAndRank(userId, providerId, 1);
-		int rank = sc == null ? 1 : sc.getRank() + 1;
+				.getConnectionByUserIdProviderIdAndRank(userId, providerId, 1L);
+		Long rank = sc == null ? 1 : sc.getRank() + 1;
 
 		// check if a connection for the user and provider exists
 		sc = socialConnectionManager.getConnectionByUserIdProviderIdAndRank(
@@ -271,7 +272,7 @@ public class GaeConnectionRepository implements ConnectionRepository {
 
 	private Connection<?> getPrimaryConnection(String providerId) {
 		SocialConnection sc = socialConnectionManager
-				.getConnectionByUserIdProviderIdAndRank(userId, providerId, 1);
+				.getConnectionByUserIdProviderIdAndRank(userId, providerId, 1L);
 		if (sc != null) {
 			return mapEntityToConnection(sc);
 		} else {

@@ -36,7 +36,7 @@ public class GaeDatastoreSocialUserManager implements SocialUserManager
         {
             Entity user = datastore.get(key);
 
-            return UserEntityBuilder.getUser(user);
+            return SocialUserEntityBuilder.getUser(user);
         }
         catch (EntityNotFoundException e)
         {
@@ -52,7 +52,7 @@ public class GaeDatastoreSocialUserManager implements SocialUserManager
             log.debug("registerUser <- " + newUser);
         }
 
-        Entity user = UserEntityBuilder.toEntity(newUser);
+        Entity user = SocialUserEntityBuilder.toEntity(newUser);
         String userId = KeyFactory.keyToString(datastore.put(user));
 
         newUser.setUserId(userId);
@@ -68,7 +68,7 @@ public class GaeDatastoreSocialUserManager implements SocialUserManager
         }
 
         Query query = new Query(SocialUser.KIND);
-        query.setFilter(new Query.FilterPredicate(UserEntityBuilder.EMAIL, Query.FilterOperator.EQUAL, new Email(email)));
+        query.setFilter(new Query.FilterPredicate(SocialUserEntityBuilder.EMAIL, Query.FilterOperator.EQUAL, new Email(email)));
 
         PreparedQuery preparedQuery = datastore.prepare(query);
         Entity entity = preparedQuery.asSingleEntity();
@@ -78,7 +78,7 @@ public class GaeDatastoreSocialUserManager implements SocialUserManager
             return null;
         }
 
-        return UserEntityBuilder.getUser(entity);
+        return SocialUserEntityBuilder.getUser(entity);
     }
 
     public void removeUser(String userId)

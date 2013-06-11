@@ -115,11 +115,11 @@ public class GaeConnectionRepositoryTest {
 		SocialConnection sc1 = new SocialConnection();
 		sc1.setProviderId(testProviderId);
 		sc1.setUserId(testUserId);
-		sc1.setRank(1);
+		sc1.setRank(1L);
 
 		when(
 				mockSocialConnectionManager.findConnectionsByUserIdAndProviderIdForProviderUserIds(testUserId,
-						testProviderId, Lists.newArrayList("test1", testProviderUserId))).thenReturn(
+						testProviderId, Sets.newHashSet("test1", testProviderUserId))).thenReturn(
 				Sets.newHashSet(sc1));
 
 		MultiValueMap<String, Connection<?>> connectionsToUsers = repository.findConnectionsToUsers(providerUserIds);
@@ -164,7 +164,7 @@ public class GaeConnectionRepositoryTest {
 		sc.setProviderId(testProviderId);
 		sc.setUserId(testUserId);
 		sc.setProviderUserId(testProviderUserId);
-		when(mockSocialConnectionManager.getConnectionByUserIdProviderIdAndRank(testUserId, testProviderId, 1))
+		when(mockSocialConnectionManager.getConnectionByUserIdProviderIdAndRank(testUserId, testProviderId, 1l))
 				.thenReturn(sc);
 		when(mockConnectionFactoryLocator.getConnectionFactory(any(Class.class))).thenReturn(mockConnectionFactory);
 
@@ -179,7 +179,7 @@ public class GaeConnectionRepositoryTest {
 		sc.setProviderId(testProviderId);
 		sc.setUserId(testUserId);
 		sc.setProviderUserId(testProviderUserId);
-		when(mockSocialConnectionManager.getConnectionByUserIdProviderIdAndRank(testUserId, testProviderId, 1))
+		when(mockSocialConnectionManager.getConnectionByUserIdProviderIdAndRank(testUserId, testProviderId, 1l))
 				.thenReturn(sc);
 		when(mockConnectionFactoryLocator.getConnectionFactory(any(Class.class))).thenReturn(mockConnectionFactory);
 

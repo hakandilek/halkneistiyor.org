@@ -3,14 +3,16 @@ package org.halkneistiyor.datamodel;
 import java.io.Serializable;
 
 public class SocialConnection implements Serializable {
+
 	public static final String KIND = "SocialConnection";
 
 	private static final long serialVersionUID = 1L;
 
+	String key;
 	String userId;
 	String providerId;
 	String providerUserId;
-	Integer rank;
+	Long rank;
 	
 	String displayName;
 	String profileUrl;
@@ -20,6 +22,14 @@ public class SocialConnection implements Serializable {
 	String refreshToken;
 	Long expireTime;
 
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
@@ -28,11 +38,11 @@ public class SocialConnection implements Serializable {
 		this.userId = userId;
 	}
 
-	public Integer getRank() {
+	public Long getRank() {
 		return rank;
 	}
 
-	public void setRank(Integer rank) {
+	public void setRank(Long rank) {
 		this.rank = rank;
 	}
 
