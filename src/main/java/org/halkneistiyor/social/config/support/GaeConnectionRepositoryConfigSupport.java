@@ -17,7 +17,7 @@ package org.halkneistiyor.social.config.support;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.halkneistiyor.social.connection.GaeUsersConnectionRepository;
+import org.halkneistiyor.social.connect.GaeUsersConnectionRepository;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

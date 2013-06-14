@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.halkneistiyor.datamodel.SocialConnectionManager;
+import org.halkneistiyor.social.connect.GaeUsersConnectionRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

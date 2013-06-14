@@ -1,4 +1,4 @@
-package org.halkneistiyor.social.connection;
+package org.halkneistiyor.social.connect;
 
 import java.util.Collection;
 import java.util.Collections;
