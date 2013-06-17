@@ -1,6 +1,5 @@
 package org.halkneistiyor.datamodel;
 
-import org.halkneistiyor.security.model.UserRole;
 
 import java.io.Serializable;
 import java.util.Set;

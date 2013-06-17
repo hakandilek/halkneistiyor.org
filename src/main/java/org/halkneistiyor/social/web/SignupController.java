@@ -23,7 +23,7 @@ import javax.validation.Valid;
 
 import org.halkneistiyor.datamodel.SocialUser;
 import org.halkneistiyor.datamodel.SocialUserManager;
-import org.halkneistiyor.security.model.UserRole;
+import org.halkneistiyor.datamodel.UserRole;
 import org.halkneistiyor.web.message.Message;
 import org.halkneistiyor.web.message.MessageType;
 import org.springframework.social.connect.Connection;
@@ -35,16 +35,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
-import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.api.users.UserService;
 
 @Controller
 public class SignupController {
 
 	private final SocialUserManager socialUserManager;
+	
+	private final UserService userService;
 
 	@Inject
-	public SignupController(SocialUserManager socialUserManager) {
+	public SignupController(SocialUserManager socialUserManager, UserService userService) {
 		this.socialUserManager = socialUserManager;
+		this.userService = userService;
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
@@ -63,18 +66,13 @@ public class SignupController {
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request) {
-		System.out.println(formBinding);
 		if (formBinding.hasErrors()) {
 			return null;
 		}
 		SocialUser su = createUser(form, formBinding);
-		System.out.println(su);
 		if (su != null) {
-			System.out.println("signin...");
 			SignInUtils.signin(su.getUserId());
-			System.out.println("postSignup...");
 			ProviderSignInUtils.handlePostSignUp(su.getUserId(), request);
-			System.out.println("redirect...");
 			return "redirect:/";
 		}
 		return null;
@@ -89,7 +87,7 @@ public class SignupController {
 		su.setLastName(form.getLastName());
 		su.setEnabled(true);
 		Set<UserRole> roles = EnumSet.of(UserRole.USER);
-		if (UserServiceFactory.getUserService().isUserAdmin()) {
+		if (userService.isUserAdmin()) {
 			roles.add(UserRole.ADMIN);
 		}
 		su.setRoles(roles);

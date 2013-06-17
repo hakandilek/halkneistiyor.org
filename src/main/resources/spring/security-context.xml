@@ -26,36 +26,5 @@
         <s:intercept-url pattern="/schema/social/**" access="permitAll" />
         <s:intercept-url pattern="/**" access="isAuthenticated()"  />
     </s:http>
-<!-- 
-    <s:http use-expressions="true" entry-point-ref="googleEntryPoint">
-        
-        <s:intercept-url pattern="/" access="permitAll" />
-        <s:intercept-url pattern="/_ah/login" access="permitAll" />
-        <s:intercept-url pattern="/register"
-            access="hasRole('NEW_USER')" />
-        <s:intercept-url pattern="/**" access="hasRole('USER')" />
-        <s:custom-filter position="PRE_AUTH_FILTER" ref="gaeFilter" />
 
-        <s:intercept-url pattern="/**" access="denyAll" />
-        <s:form-login />
-        <s:logout />
-
-    </s:http>
- -->
-    <s:authentication-manager alias="authenticationManager">
-        <s:authentication-provider ref="googleAuthenticationProvider" />
-        <!-- TODO: other prodivers -->
-    </s:authentication-manager>
-
-    <bean id="googleEntryPoint"
-        class="org.halkneistiyor.security.GoogleAuthenticationEntryPoint" />
-
-    <bean id="gaeFilter"
-        class="org.halkneistiyor.security.web.GaeAuthenticationFilter">
-        <property name="authenticationManager" ref="authenticationManager" />
-    </bean>
-
-    <bean id="googleAuthenticationProvider"
-        class="org.halkneistiyor.security.GoogleAuthenticationProvider">
-    </bean>
 </beans>

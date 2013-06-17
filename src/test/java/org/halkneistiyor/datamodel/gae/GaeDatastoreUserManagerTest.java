@@ -11,7 +11,7 @@ import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestC
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import org.halkneistiyor.datamodel.SocialUser;
 import org.halkneistiyor.datamodel.SocialUserManager;
-import org.halkneistiyor.security.model.UserRole;
+import org.halkneistiyor.datamodel.UserRole;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

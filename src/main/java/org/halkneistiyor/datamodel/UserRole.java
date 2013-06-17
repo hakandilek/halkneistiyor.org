@@ -1,14 +1,12 @@
-package org.halkneistiyor.security.model;
+package org.halkneistiyor.datamodel;
 
 import org.springframework.security.core.GrantedAuthority;
 
 public enum UserRole implements GrantedAuthority {
 
-	NEW_USER(0),
+	USER(0),
 
-	USER(1),
-
-	ADMIN(2),
+	ADMIN(1),
 
 	;
 

@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/resources/spring/security-context.xml</config>
 		<config>src/main/resources/spring/social-context.xml</config>
+		<config>src/main/resources/spring/gae-context.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

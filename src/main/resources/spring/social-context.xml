@@ -5,6 +5,7 @@
     xmlns:twitter="http://www.springframework.org/schema/social/twitter"
     xmlns:social="http://www.springframework.org/schema/social"
     xmlns:linkedin="http://www.springframework.org/schema/social/linkedin"
+    xmlns:google="http://www.springframework.org/schema/social/google"
     xmlns:c="http://www.springframework.org/schema/c"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:hni="http://www.halkneistiyor.org/schema/social"
@@ -12,6 +13,7 @@
         http://www.springframework.org/schema/social/linkedin http://www.springframework.org/schema/social/spring-social-linkedin.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/social/twitter http://www.springframework.org/schema/social/spring-social-twitter.xsd
+        http://www.springframework.org/schema/social/google http://www.springframework.org/schema/social/spring-social-google.xsd
         http://www.springframework.org/schema/social http://www.springframework.org/schema/social/spring-social.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
         http://www.halkneistiyor.org/schema/social http://social.halkneistiyor.appspot.com/schema/social/hni-social-1.0.xsd">
@@ -20,6 +22,7 @@
 
     <facebook:config app-id="${facebook.clientId}" app-secret="${facebook.clientSecret}" app-namespace="socialshowcase" />
     <twitter:config app-id="${twitter.consumerKey}" app-secret="${twitter.consumerSecret}"/>
+    <google:config app-id="${google.consumerKey}" app-secret="${google.consumerSecret}"/>
 
     <!-- custom connection repository -->
     <bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors" factory-method="noOpText"/>

@@ -20,6 +20,12 @@
         <input type="hidden" name="scope" value="publish_stream,user_photos,offline_access" />
         <button type="submit"><img src="<c:url value="/img/sign-in-with-facebook.png"/>" /></button>
     </form>
+
+    <!-- GOOGLE SIGNIN -->
+    <form name="gg_signin" id="gg_signin" action="<c:url value="/signin/google"/>" method="POST">
+        <input type="hidden" name="scope" value="email profile" />
+        <button type="submit"><img src="<c:url value="/img/sign-in-with-google.png"/>" /></button>
+    </form>
 </div>
 <!-- /container -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>

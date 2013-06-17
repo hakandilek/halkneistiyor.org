@@ -5,7 +5,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.security.model.UserRole;
+import org.halkneistiyor.datamodel.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
