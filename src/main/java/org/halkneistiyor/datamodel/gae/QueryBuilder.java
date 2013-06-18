@@ -20,9 +20,8 @@ public class QueryBuilder<M> {
 	private Query query;
 	private Filter filter;
 	private EntityBuilder<M> entityBuilder;
-	private List<Filter> filterList;
 
-	public QueryBuilder(String kind, EntityBuilder<M> entityBuilder) {
+    public QueryBuilder(String kind, EntityBuilder<M> entityBuilder) {
 		this.entityBuilder = entityBuilder;
 		query = new Query(kind);
 	}
@@ -75,8 +74,7 @@ public class QueryBuilder<M> {
 		PreparedQuery pq = prepare(datastore);
 		Entity e = pq.asSingleEntity();
 		if (e == null) return null;
-		M m = entityBuilder.buildModel(e);
-		return m;
+        return entityBuilder.buildModel(e);
 	}
 
 	private void addFilter(Filter nf) {
@@ -84,7 +82,8 @@ public class QueryBuilder<M> {
 			filter = nf;
 			query.setFilter(filter);
 		} else {
-			if (filter instanceof CompositeFilter) {
+            List<Filter> filterList;
+            if (filter instanceof CompositeFilter) {
 				CompositeFilter cf = (CompositeFilter) filter;
 				filterList = Lists.newArrayList(cf.getSubFilters());
 				filterList.add(nf);

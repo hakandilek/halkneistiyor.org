@@ -1,7 +1,6 @@
 package org.halkneistiyor.datamodel.gae;
 
 import static org.halkneistiyor.datamodel.gae.SocialConnectionEntityBuilder.*;
-import static org.halkneistiyor.datamodel.gae.SocialConnectionEntityBuilder.PROVIDER_USER_ID;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,13 +36,13 @@ public class GaeDatastoreSocialConnectionManager implements SocialConnectionMana
 		if (log.isDebugEnabled())
 			log.debug("findUserIdsByProviderUserId <-");
 
-		QueryBuilder<SocialConnection> qb = new QueryBuilder<SocialConnection>(SocialConnection.KIND, entityBuilder)
+		QueryBuilder<SocialConnection> qb = new QueryBuilder<>(SocialConnection.KIND, entityBuilder)
 				.eq(PROVIDER_ID, providerId).eq(PROVIDER_USER_ID, providerUserId);
 		PreparedQuery pq = qb.prepare(datastore);
 
-		List<String> localUserIds = new ArrayList<String>();
+		List<String> localUserIds = new ArrayList<>();
 		for (Entity result : pq.asIterable()) {
-			localUserIds.add((String) result.getProperty("userId"));
+			localUserIds.add((String) result.getProperty(USER_ID));
 		}
 
 		return localUserIds;
@@ -54,13 +53,13 @@ public class GaeDatastoreSocialConnectionManager implements SocialConnectionMana
 		if (log.isDebugEnabled())
 			log.debug("findUserIdsConnectedTo <-");
 
-		QueryBuilder<SocialConnection> qb = new QueryBuilder<SocialConnection>(SocialConnection.KIND, entityBuilder)
+		QueryBuilder<SocialConnection> qb = new QueryBuilder<>(SocialConnection.KIND, entityBuilder)
 				.eq(PROVIDER_ID, providerId).in(PROVIDER_USER_ID, providerUserIds);
 		PreparedQuery pq = qb.prepare(datastore);
 
-		Set<String> localUserIds = new HashSet<String>();
+		Set<String> localUserIds = new HashSet<>();
 		for (final Entity entity : pq.asIterable()) {
-			localUserIds.add((String) entity.getProperty("userId"));
+			localUserIds.add((String) entity.getProperty(USER_ID));
 		}
 
 		return localUserIds;
@@ -70,7 +69,7 @@ public class GaeDatastoreSocialConnectionManager implements SocialConnectionMana
 	public Collection<SocialConnection> findConnectionsByUserId(String userId) {
 		if (log.isDebugEnabled())
 			log.debug("findConnectionsByUserId <-");
-		QueryBuilder<SocialConnection> qb = new QueryBuilder<SocialConnection>(SocialConnection.KIND, entityBuilder)
+		QueryBuilder<SocialConnection> qb = new QueryBuilder<>(SocialConnection.KIND, entityBuilder)
 				.eq(USER_ID, userId).sort(PROVIDER_ID, RANK);
 		return qb.list(datastore);
 	}
@@ -79,7 +78,7 @@ public class GaeDatastoreSocialConnectionManager implements SocialConnectionMana
 	public Collection<SocialConnection> findConnectionsByUserIdAndProviderId(String userId, String providerId) {
 		if (log.isDebugEnabled())
 			log.debug("findConnectionsByUserIdAndProviderId <-");
-		QueryBuilder<SocialConnection> qb = new QueryBuilder<SocialConnection>(SocialConnection.KIND, entityBuilder)
+		QueryBuilder<SocialConnection> qb = new QueryBuilder<>(SocialConnection.KIND, entityBuilder)
 				.eq(USER_ID, userId).eq(PROVIDER_ID, providerId).sort(RANK);
 		return qb.list(datastore);
 	}
@@ -89,7 +88,7 @@ public class GaeDatastoreSocialConnectionManager implements SocialConnectionMana
 			String providerId, Set<String> providerUserIds) {
 		if (log.isDebugEnabled())
 			log.debug("findConnectionsByUserIdAndProviderIdForProviderUserIds <-");
-		QueryBuilder<SocialConnection> qb = new QueryBuilder<SocialConnection>(SocialConnection.KIND, entityBuilder)
+		QueryBuilder<SocialConnection> qb = new QueryBuilder<>(SocialConnection.KIND, entityBuilder)
 				.eq(USER_ID, userId).eq(PROVIDER_ID, providerId).in(PROVIDER_USER_ID, providerUserIds);
 		return qb.list(datastore);
 	}
@@ -98,7 +97,7 @@ public class GaeDatastoreSocialConnectionManager implements SocialConnectionMana
 	public SocialConnection getConnectionByUserIdAndProviderId(String userId, String providerId, String providerUserId) {
 		if (log.isDebugEnabled())
 			log.debug("getConnectionByUserIdAndProviderId <-");
-		QueryBuilder<SocialConnection> qb = new QueryBuilder<SocialConnection>(SocialConnection.KIND, entityBuilder)
+		QueryBuilder<SocialConnection> qb = new QueryBuilder<>(SocialConnection.KIND, entityBuilder)
 				.eq(USER_ID, userId).eq(PROVIDER_ID, providerId).eq(PROVIDER_USER_ID, providerUserId);
 		return qb.single(datastore);
 	}
@@ -107,7 +106,7 @@ public class GaeDatastoreSocialConnectionManager implements SocialConnectionMana
 	public SocialConnection getConnectionByUserIdProviderIdAndRank(String userId, String providerId, Long rank) {
 		if (log.isDebugEnabled())
 			log.debug("getConnectionByUserIdProviderIdAndRank <-");
-		QueryBuilder<SocialConnection> qb = new QueryBuilder<SocialConnection>(SocialConnection.KIND, entityBuilder)
+		QueryBuilder<SocialConnection> qb = new QueryBuilder<>(SocialConnection.KIND, entityBuilder)
 				.eq(USER_ID, userId).eq(PROVIDER_ID, providerId).eq(RANK, rank).sort(RANK, SortDirection.DESCENDING);
 		return qb.single(datastore);
 	}

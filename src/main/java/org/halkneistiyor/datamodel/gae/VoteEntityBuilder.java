@@ -12,9 +12,8 @@ import java.util.Date;
  * @author Erdinc Yilmazel (eyilmazel@tripadvisor.com)
  * @since 6/7/13
  */
-public class VoteEntityBuilder
+public class VoteEntityBuilder implements EntityBuilder<Vote>
 {
-    public static final String VOTE_ID = "voteId";
     public static final String REQUEST_ID = "requestId";
     public static final String USER_ID = "userId";
     public static final String VOTE_DATE = "voteDate";
@@ -40,7 +39,8 @@ public class VoteEntityBuilder
         return entity;
     }
 
-    public static Vote getVote(Entity entity)
+    @Override
+    public Vote buildModel(Entity entity)
     {
         Vote vote = new Vote();
         Key key = entity.getKey();
@@ -55,5 +55,11 @@ public class VoteEntityBuilder
         vote.setVoteDate((Date) entity.getProperty(VOTE_DATE));
 
         return vote;
+    }
+
+    @Override
+    public Entity buildEntity(Vote sc)
+    {
+        return null;
     }
 }

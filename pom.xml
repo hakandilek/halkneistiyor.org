@@ -181,6 +181,18 @@
             <artifactId>guava</artifactId>
             <version>14.0.1</version>
         </dependency>
+
+        <!-- Cambridge -->
+        <dependency>
+            <groupId>com.googlecode.cambridge</groupId>
+            <artifactId>cambridge-core</artifactId>
+            <version>0.9-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.cambridge</groupId>
+            <artifactId>cambridge-spring</artifactId>
+            <version>0.9-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -223,6 +235,15 @@
 
     <repositories>
         <repository>
+            <id>Cambridge-mvn-repo</id>
+            <url>https://raw.github.com/erdincyilmazel/Cambridge/mvn-repo/</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
             <id>springsource-repo</id>
             <name>SpringSource Repository</name>
             <url>http://repo.springsource.org/release</url>
@@ -242,6 +263,5 @@
             <url>https://github.com/GabiAxel/maven/raw/master/</url>
         </repository>
     </repositories>
-
 </project>
 

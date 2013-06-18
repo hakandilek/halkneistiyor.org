@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Erdinc Yilmazel (eyilmazel@tripadvisor.com)
  * @since 6/8/13
  */
-public class RequestEntityBuilder
+public class RequestEntityBuilder implements EntityBuilder<RequestEntry>
 {
     public static final String REQUESTER_ID = "requesterId";
     public static final String ENTRY_DATE = "entryDate";
@@ -21,30 +21,8 @@ public class RequestEntityBuilder
     public static final String YES_COUNT = "yesCount";
     public static final String NO_COUNT = "noCount";
 
-    public static Entity getEntity(RequestEntry requestEntry)
-    {
-        Entity entity;
-
-        if (requestEntry.getRequesterId() == null)
-        {
-            entity = new Entity(RequestEntry.KIND);
-        }
-        else
-        {
-            entity = new Entity(requestEntry.getRequesterId());
-        }
-
-        entity.setProperty(REQUESTER_ID, KeyFactory.stringToKey(requestEntry.getRequesterId()));
-        entity.setProperty(ENTRY_DATE, requestEntry.getEntryDate());
-        entity.setProperty(URL_ID, requestEntry.getUrlId());
-        entity.setProperty(REQUEST, requestEntry.getRequest());
-        entity.setProperty(YES_COUNT, requestEntry.getYesCount());
-        entity.setProperty(NO_COUNT, requestEntry.getNoCount());
-
-        return entity;
-    }
-
-    public static RequestEntry getRequestEntry(Entity entity)
+    @Override
+    public RequestEntry buildModel(Entity entity)
     {
         RequestEntry requestEntry = new RequestEntry();
         Key key = entity.getKey();
@@ -68,5 +46,29 @@ public class RequestEntityBuilder
         requestEntry.setNoCount(noCount == null ? 0 : (Long) noCount);
 
         return requestEntry;
+    }
+
+    @Override
+    public Entity buildEntity(RequestEntry requestEntry)
+    {
+        Entity entity;
+
+        if (requestEntry.getRequesterId() == null)
+        {
+            entity = new Entity(RequestEntry.KIND);
+        }
+        else
+        {
+            entity = new Entity(requestEntry.getRequesterId());
+        }
+
+        entity.setProperty(REQUESTER_ID, KeyFactory.stringToKey(requestEntry.getRequesterId()));
+        entity.setProperty(ENTRY_DATE, requestEntry.getEntryDate());
+        entity.setProperty(URL_ID, requestEntry.getUrlId());
+        entity.setProperty(REQUEST, requestEntry.getRequest());
+        entity.setProperty(YES_COUNT, requestEntry.getYesCount());
+        entity.setProperty(NO_COUNT, requestEntry.getNoCount());
+
+        return entity;
     }
 }
