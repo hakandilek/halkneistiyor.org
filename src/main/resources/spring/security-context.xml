@@ -27,4 +27,12 @@
         <s:intercept-url pattern="/**" access="isAuthenticated()"  />
     </s:http>
 
+    <s:authentication-manager alias="authenticationManager">
+        <s:authentication-provider ref="socialAuthenticationProvider" />
+    </s:authentication-manager>
+
+    <bean id="socialAuthenticationProvider"
+        class="org.springframework.social.security.SocialAuthenticationProvider" autowire="constructor">
+    </bean>
+
 </beans>

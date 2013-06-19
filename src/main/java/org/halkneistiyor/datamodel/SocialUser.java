@@ -2,9 +2,13 @@ package org.halkneistiyor.datamodel;
 
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Set;
 
-public class SocialUser implements Serializable
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.social.security.SocialUserDetails;
+
+public class SocialUser implements Serializable, SocialUserDetails
 {
     public static final String KIND = "User";
 
@@ -18,6 +22,38 @@ public class SocialUser implements Serializable
     Set<UserRole> roles;
     boolean enabled;
 
+    // UserDetails methods -------
+    
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return roles;
+	}
+
+	@Override
+	public String getPassword() {
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		return userId;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return enabled;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return enabled;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return enabled;
+	}
+	
     public String getUserId()
     {
         return userId;
@@ -119,4 +155,5 @@ public class SocialUser implements Serializable
     {
         return userId != null ? userId.hashCode() : 0;
     }
+
 }

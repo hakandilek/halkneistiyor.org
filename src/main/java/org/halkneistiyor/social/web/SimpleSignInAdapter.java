@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.halkneistiyor.datamodel.SocialUser;
+import org.halkneistiyor.datamodel.SocialUserManager;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -31,14 +33,18 @@ public class SimpleSignInAdapter implements SignInAdapter {
 
 	private final RequestCache requestCache;
 
+	private final SocialUserManager socialUserManager;
+
 	@Inject
-	public SimpleSignInAdapter(RequestCache requestCache) {
+	public SimpleSignInAdapter(RequestCache requestCache, SocialUserManager socialUserManager) {
 		this.requestCache = requestCache;
+		this.socialUserManager = socialUserManager;
 	}
-	
+
 	@Override
 	public String signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
-		SignInUtils.signin(localUserId);
+		SocialUser user = socialUserManager.findUser(localUserId);
+		SignInUtils.signin(user);
 		return extractOriginalUrl(request);
 	}
 
@@ -53,7 +59,7 @@ public class SimpleSignInAdapter implements SignInAdapter {
 		removeAutheticationAttributes(nativeReq.getSession(false));
 		return saved.getRedirectUrl();
 	}
-		 
+
 	private void removeAutheticationAttributes(HttpSession session) {
 		if (session == null) {
 			return;

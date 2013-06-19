@@ -26,13 +26,16 @@ import org.halkneistiyor.datamodel.SocialUserManager;
 import org.halkneistiyor.datamodel.UserRole;
 import org.halkneistiyor.web.message.Message;
 import org.halkneistiyor.web.message.MessageType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.web.ProviderSignInAttempt;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 
 import com.google.appengine.api.users.UserService;
@@ -71,8 +74,13 @@ public class SignupController {
 		}
 		SocialUser su = createUser(form, formBinding);
 		if (su != null) {
-			SignInUtils.signin(su.getUserId());
+			System.out.println(su);
+			SignInUtils.signin(su);
+			System.out.println("signed in : " + SecurityContextHolder.getContext());
+			System.out.println("ProviderSignInAttempt : " + request.getAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE, RequestAttributes.SCOPE_SESSION)); 
 			ProviderSignInUtils.handlePostSignUp(su.getUserId(), request);
+			System.out.println("ProviderSignInAttempt : " + request.getAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE, RequestAttributes.SCOPE_SESSION));
+			System.out.println("redirecting...");
 			return "redirect:/";
 		}
 		return null;
