@@ -16,15 +16,19 @@
         <s:form-login login-page="/signin" login-processing-url="/signin/authenticate" authentication-failure-url="/signin?param.error=bad_credentials" />
         <s:logout logout-url="/signout" delete-cookies="JSESSIONID" />
 
-        <s:intercept-url pattern="/" access="permitAll" />
-        <s:intercept-url pattern="/_ah/login" access="permitAll" />
-        <s:intercept-url pattern="/favicon.ico" access="permitAll" />
-        <s:intercept-url pattern="/resources/**" access="permitAll" />
-        <s:intercept-url pattern="/signin/**" access="permitAll" />
-        <s:intercept-url pattern="/signup/**" access="permitAll" />
-        <s:intercept-url pattern="/disconnect/facebook" access="permitAll" />
-        <s:intercept-url pattern="/schema/social/**" access="permitAll" />
-        <s:intercept-url pattern="/**" access="isAuthenticated()"  />
+		<!-- login / signup etc -->
+        <s:intercept-url pattern="/_ah/login" 				access="permitAll" />
+        <s:intercept-url pattern="/favicon.ico" 			access="permitAll" />
+        <s:intercept-url pattern="/resources/**" 			access="permitAll" />
+        <s:intercept-url pattern="/signin/**" 				access="permitAll" />
+        <s:intercept-url pattern="/signup/**" 				access="permitAll" />
+        <s:intercept-url pattern="/disconnect/facebook" 	access="permitAll" />
+        <s:intercept-url pattern="/schema/social/**" 		access="permitAll" />
+		<!-- app urls to permit -->
+        <s:intercept-url pattern="/" 						access="permitAll" />
+        <s:intercept-url pattern="/request/popular" 		access="permitAll" />
+		<!-- global restriction -->
+        <s:intercept-url pattern="/**" 						access="isAuthenticated()"  />
     </s:http>
 
     <s:authentication-manager alias="authenticationManager">

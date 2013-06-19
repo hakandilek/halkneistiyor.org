@@ -5,13 +5,13 @@ import java.io.Serializable;
 import org.halkneistiyor.datamodel.SocialUser;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 
-public class CustomAuthenticationToken extends AbstractAuthenticationToken implements Serializable {
+public class UserAuthenticationToken extends AbstractAuthenticationToken implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	private SocialUser user;
 
-	public CustomAuthenticationToken(SocialUser user) {
+	public UserAuthenticationToken(SocialUser user) {
 		super(user.getAuthorities());
 		this.user = user;
 		setAuthenticated(user.isEnabled());
@@ -27,9 +27,13 @@ public class CustomAuthenticationToken extends AbstractAuthenticationToken imple
 		return null;
 	}
 
+	public SocialUser getUser() {
+		return user;
+	}
+
 	@Override
 	public String toString() {
-		return "CustomAuthenticationToken [user=" + user + "]";
+		return "UserAuthenticationToken [user=" + user + "]";
 	}
 	
 }

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <jsp:include page="header.jsp"/>
@@ -24,17 +25,20 @@
             <td>Topçu kışlası projesi iptal edilmeli.</td>
             <td>
                 <a href="/topcu-kislasi-iptal-edilmeli?onay=evet">10101</a> %95 <span class="label label-success">Evet</span>
-
-                <div style="padding-top: 10px;">
-                    <a class="btn btn-small btn-success" href="#"><i class="icon-thumbs-up icon-white"></i> Evet</a>
-                </div>
+				<c:if test="${authenticated}">
+	                <div style="padding-top: 10px;">
+	                    <a class="btn btn-small btn-success" href="#"><i class="icon-thumbs-up icon-white"></i> Evet</a>
+	                </div>
+                </c:if>
             </td>
             <td>
                 <a href="/topcu-kislasi-iptal-edilmeli?onay=hayir">120</a> %5 <span class="label label-important">Hayır</span>
 
-                <div style="padding-top: 10px;">
-                    <a class="btn btn-small btn-danger" href="#"><i class="icon-thumbs-down icon-white"></i> Hayır</a>
-                </div>
+				<c:if test="${authenticated}">
+	                <div style="padding-top: 10px;">
+	                    <a class="btn btn-small btn-danger" href="#"><i class="icon-thumbs-down icon-white"></i> Hayır</a>
+	                </div>
+                </c:if>
             </td>
             <td>
                 <div class="progress">

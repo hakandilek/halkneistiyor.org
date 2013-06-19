@@ -16,14 +16,30 @@
 package org.halkneistiyor.social.web;
 
 import org.halkneistiyor.datamodel.SocialUser;
-import org.halkneistiyor.social.connect.CustomAuthenticationToken;
+import org.halkneistiyor.social.connect.UserAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class SignInUtils {
 	
 	public static void signin(SocialUser user) {
-		System.out.println("signing in: " + user);
-		SecurityContextHolder.getContext().setAuthentication(new CustomAuthenticationToken(user));	
+		SecurityContextHolder.getContext().setAuthentication(new UserAuthenticationToken(user));	
+	}
+	
+	public static SocialUser authenticatedUser() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context != null) {
+			Authentication auth = context.getAuthentication();
+			
+			if (auth != null && auth instanceof UserAuthenticationToken) {
+				return ((UserAuthenticationToken)auth).getUser();
+			}
+		}
+		return null;
 	}
 
+	public static boolean isAuthenticated() {
+		return authenticatedUser() != null;
+	}
 }

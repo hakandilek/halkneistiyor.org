@@ -1,6 +1,8 @@
 package org.halkneistiyor.web;
 
+import org.halkneistiyor.social.web.SignInUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -12,7 +14,9 @@ public class RequestController {
 	}
 
 	@RequestMapping("/request/popular")
-	public String requestPopular() {
+	public String requestPopular(Model model) {
+		model.addAttribute("authenticated", SignInUtils.isAuthenticated());
+		model.addAttribute("authUser", SignInUtils.authenticatedUser());
 		return "requestPopular";
 	}
 
