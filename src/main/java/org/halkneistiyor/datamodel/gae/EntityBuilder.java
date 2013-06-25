@@ -8,4 +8,5 @@ public interface EntityBuilder<M> {
 
 	Entity buildEntity(M sc);
 
+
 }

@@ -22,23 +22,17 @@
 
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
 		p:basename="/WEB-INF/messages/messages" />
-	
-    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-        <property name="contentNegotiationManager" ref="cnManager"/>
 
-        <property name="viewResolvers">
-            <list>
-                <!-- Default viewClass: JSTL view (JSP with html output) -->
-                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-                    <!-- Example: a logical view name of 'vets' is mapped to '/WEB-INF/jsp/vets.jsp' -->
-                    <property name="prefix" value="/WEB-INF/jsp/"/>
-                    <property name="suffix" value=".jsp"/>
-                </bean>
+    <bean id="cambridgeConfig" class="org.springframework.web.servlet.view.cambridge.CambridgeConfigurer">
+        <property name="templatePath" value="/WEB-INF/templates/"/>
+        <property name="templateExtension" value="html"/>
+        <property name="expressionLanguage" value="spel"/>
+        <property name="changeDetectionInterval" value="1000"/>
+    </bean>
 
-                <!-- Used here for 'xml' and 'atom' views  -->
-                <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
-            </list>
-        </property>
+    <bean class="org.springframework.web.servlet.view.cambridge.CambridgeViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="exposeRequestAttributes" value="true"/>
     </bean>
 
     <!-- Simple strategy: only path extension is taken into account -->

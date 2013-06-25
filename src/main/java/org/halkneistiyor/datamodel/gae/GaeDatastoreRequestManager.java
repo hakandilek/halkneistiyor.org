@@ -35,6 +35,9 @@ public class GaeDatastoreRequestManager implements RequestManager
 
     private final static Log log = LogFactory.getLog(GaeDatastoreSocialUserManager.class);
 
+    private EntityBuilder<RequestEntry> requestEntityBuilder = new RequestEntityBuilder();
+    private EntityBuilder<Vote> voteEntityBuilder = new VoteEntityBuilder();
+
     @Override
     public String addRequest(RequestEntry entry) throws Exception
     {
@@ -43,7 +46,7 @@ public class GaeDatastoreRequestManager implements RequestManager
         {
             try
             {
-                Key key = dataStore.put(RequestEntityBuilder.getEntity(entry));
+                Key key = dataStore.put(requestEntityBuilder.buildEntity(entry));
                 String requestId = KeyFactory.keyToString(key);
                 entry.setRequestId(requestId);
                 memcacheService.put(entry.getUrlId(), entry, Expiration.byDeltaSeconds(30 * 60));
@@ -70,7 +73,7 @@ public class GaeDatastoreRequestManager implements RequestManager
         try
         {
             Entity entity = dataStore.get(key);
-            return RequestEntityBuilder.getRequestEntry(entity);
+            return requestEntityBuilder.buildModel(entity);
         }
         catch (EntityNotFoundException e)
         {
@@ -103,7 +106,7 @@ public class GaeDatastoreRequestManager implements RequestManager
             return null;
         }
 
-        RequestEntry requestEntry = RequestEntityBuilder.getRequestEntry(requestEntity);
+        RequestEntry requestEntry = requestEntityBuilder.buildModel(requestEntity);
 
         memcacheService.put(urlId, requestEntity);
 
@@ -251,6 +254,6 @@ public class GaeDatastoreRequestManager implements RequestManager
             return null;
         }
 
-        return VoteEntityBuilder.getVote(voteEntity);
+        return voteEntityBuilder.buildModel(voteEntity);
     }
 }

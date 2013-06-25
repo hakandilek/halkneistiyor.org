@@ -15,7 +15,7 @@
 </c:if>
 
 <c:url value="/signup" var="signupUrl" />
-<form:form id="signup" action="${signupUrl}" method="post" modelAttribute="signupForm">
+<form:form id="signup" action="${signupUrl}" method="post" modelAttribute="signupForm" cssClass="form-horizontal">
 	<div class="formInfo">
 		<s:bind path="*">
 			<c:choose>
@@ -27,8 +27,17 @@
 	</div>
 	
 	<fieldset>
+        <div class="control-group">
+            <form:label path="firstName">First Name</form:label>
+            <div class="controls">
+                <form:input path="firstName" placeholder="First name" />
+            </div>
+
+            <form:errors path="firstName" element="span" cssClass="help-block error" />
+        </div>
+
 		<form:label path="firstName">First Name <form:errors path="firstName" cssClass="error" /></form:label>
-		<form:input path="firstName" />
+
 		<form:label path="lastName">Last Name <form:errors path="lastName" cssClass="error" /></form:label>
 		<form:input path="lastName" />
 		<form:label path="email">Email<form:errors path="email" cssClass="error" /></form:label>

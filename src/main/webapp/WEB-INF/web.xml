@@ -8,6 +8,16 @@
         <param-value>classpath:/spring/app-context.xml</param-value>
     </context-param>
 
+    <filter>
+        <filter-name>GAEFilter</filter-name>
+        <filter-class>org.halkneistiyor.web.GAEFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>GAEFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
     <!-- Ensure UTF-8 encoded pages so that certain characters are displayed and submitted correctly -->
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -33,7 +43,7 @@
     </filter>
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/uyeler</url-pattern>
     </filter-mapping>
 
     <!-- Enables support for DELETE and PUT request methods with web browser clients -->
